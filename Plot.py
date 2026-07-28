@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def plot_predictions(dates, actual, actual_5, actual_20,
+                     prediction_1, prediction_5, prediction_20, test_rmse,
+                     test5_rmse, test20_rmse, ticker):
 
-def plot_predictions(dates, actual, actual_5, actual_20, prediction_1, prediction_5, prediction_20, test_rmse, test5_rmse, test20_rmse, ticker):
     # Convert (n, 1) arrays to (n,) for plotting
     actual = np.asarray(actual).reshape(-1)
     actual_5 = np.asarray(actual_5).reshape(-1)

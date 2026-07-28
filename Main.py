@@ -12,14 +12,18 @@ from sklearn.metrics import root_mean_squared_error
 
 from Plot import plot_predictions
 from Model import Model
-#ignore this line
 
 # using cuda if user has gpu available, else utilize cpu for resources
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # if you want to choose the stock, replace line 17 with user input
-ticker = 'MSFT'
-df = yf.download(ticker, '2023-01-01')
+ticker = input("Enter a public stock ticker (for example, MSFT): ").strip().upper()
+start_date = input("Enter a start date (YYYY-MM-DD): ").strip()
+
+ticker = ticker or "MSFT"
+start_date = start_date or "2023-01-01"
+
+df = yf.download(ticker, start = start_date)
 #print(df) #to visualize table in console
 
 scaler = StandardScaler()
@@ -133,7 +137,6 @@ test20_rmse = root_mean_squared_error(y_test[:, 0], y20_test_prediction[:, 0])
 
 #print(train_rmse, test_rmse)
 
-#fig = plt.figure(figsize = (12,12))
 test_dates = df.iloc[-len(y_test):].index
 
 plot_predictions(
@@ -149,6 +152,3 @@ plot_predictions(
     test20_rmse=test20_rmse,
     ticker=ticker,
 )
-test_dates = df.iloc[-len(y_test):].index
-
-
