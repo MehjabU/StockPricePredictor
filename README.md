@@ -8,6 +8,14 @@ sequences, and divided chronologically into training and testing sets.
 The application plots each model's predictions against actual closing prices and
 displays the absolute prediction error and root mean squared error (RMSE).
 
+## Acknowledgements
+
+This project was heavily inspired by the following YouTube tutorial. The overall 
+design and implementation approach are based on the concepts presented in the 
+video.
+
+- https://www.youtube.com/watch?v=IJ50ew8wi-0
+
 ## Features
 
 - Downloads current historical stock data with `yfinance`
