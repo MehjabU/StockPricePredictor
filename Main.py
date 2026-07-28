@@ -10,6 +10,7 @@ import torch.optim as optim
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import root_mean_squared_error
 
+from Plot import plot_predictions
 from Model import Model
 #ignore this line
 
@@ -132,34 +133,22 @@ test20_rmse = root_mean_squared_error(y_test[:, 0], y20_test_prediction[:, 0])
 
 #print(train_rmse, test_rmse)
 
-fig = plt.figure(figsize = (12,12))
-gs = fig.add_gridspec(4, 1)
-ax1 = fig.add_subplot(gs[:3, 0])
-#data from beginning to end
-ax1.plot(df.iloc[-len(y_test):].index, y_test, color = 'blue', label = 'Actual Price')
-ax1.plot(df.iloc[-len(y_test):].index, y_test_prediction, color = 'green', label = 'Predicted Price One Day Ahead')
-ax1.plot(df.iloc[-len(y5_test):].index, y5_test_prediction, color = 'purple', label = 'Predicted Price Five Days Ahead')
-ax1.plot(df.iloc[-len(y20_test):].index, y20_test_prediction, color = 'orange', label = 'Predicted Price 20 Days Ahead')
-ax1.legend()
-plt.title(f"{ticker} Stock Price Prediction")
-plt.xlabel("Date")
-plt.ylabel("Price")
+#fig = plt.figure(figsize = (12,12))
+test_dates = df.iloc[-len(y_test):].index
 
-ax2 = fig.add_subplot(gs[3, 0])
-ax2.axhline(test_rmse, color = 'blue', linestyle = '--', label = 'RMSE')
-ax2.plot(df[-len(y_test):].index, abs(y_test - y_test_prediction), color = 'red', label = 'Prediction Error')
-
-ax2.axhline(test5_rmse, color = 'blue', linestyle = '-.', label = 'RMSE')
-ax2.plot(df[-len(y5_test):].index, abs(y5_test - y5_test_prediction), color = 'pink', label = 'Prediction Error')
-
-ax2.axhline(test20_rmse, color = 'blue', linestyle = ':', label = 'RMSE')
-ax2.plot(df[-len(y20_test):].index, abs(y20_test - y20_test_prediction), color = 'black', label = 'Prediction Error')
-ax2.legend()
-plt.ylabel("Error")
-plt.title("Prediction Error")
-plt.xlabel("Date")
-
-plt.tight_layout()
-plt.show()
+plot_predictions(
+    dates=test_dates,
+    actual=y_test,
+    actual_5=y5_test,
+    actual_20=y20_test,
+    prediction_1=y_test_prediction,
+    prediction_5=y5_test_prediction,
+    prediction_20=y20_test_prediction,
+    test_rmse=test_rmse,
+    test5_rmse=test5_rmse,
+    test20_rmse=test20_rmse,
+    ticker=ticker,
+)
+test_dates = df.iloc[-len(y_test):].index
 
 
