@@ -52,7 +52,7 @@ StockPricePredictor/
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/YOUR-USERNAME/StockPricePredictor.git
+   git clone https://github.com/MehjabU/StockPricePredictor.git
    cd StockPricePredictor
    ```
 
